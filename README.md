@@ -1,18 +1,68 @@
-Hi ![](https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif) My name is Atul Wanve
-===================================================================================================================================
+# Binance Futures Testnet Trading Bot
 
-Full Stack Developer
---------------------
+A simplified Python-based trading bot for Binance Futures (USDT-M) Testnet. This application supports placing Market and Limit orders via a Command Line Interface (CLI).
 
-Python developer with nearly a year of professional experience as the primary engineer on an open-source Kubernetes management application. Strong in Python, real-time and event-driven data processing, and full-stack web development (Django, Django REST Framework, React), with hands-on LLM integration using the Google Gemini API. Comfortable owning features end-to-end — research, design, implementation, and testing.
+## Features
+- **Market & Limit Orders**: Supports both BUY and SELL sides.
+- **Structured Code**: Separated into client, order logic, validation, and CLI layers.
+- **Robust Logging**: All API interactions and errors are logged to `logs/trading_bot.log`.
+- **Input Validation**: Ensures all user inputs are valid before hitting the API.
+- **Interactive Mode**: Bonus feature for a more user-friendly experience.
 
-* 🌍  I'm based in Pune, Maharashtra, IND
-* ✉️  You can contact me at [atulwanve03@gmail.com](mailto:atulwanve03@gmail.com)
+## Setup Instructions
 
-<p align="left">
-<a href="https://www.python.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/python-colored.svg" alt="Python" title="Python" width="36" height="36" /></a><a href="https://git-scm.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/git-colored.svg" alt="Git" title="Git" width="36" height="36" /></a><a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/visualstudiocode-colored.svg" alt="VS Code" title="VS Code" width="36" height="36" /></a><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg" alt="HTML5" title="HTML5" width="36" height="36" /></a><a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg" alt="React" title="React" width="36" height="36" /></a><a href="https://www.w3.org/TR/CSS/#css" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg" alt="CSS3" title="CSS3" width="36" height="36" /></a><a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/mongodb-colored.svg" alt="MongoDB" title="MongoDB" width="36" height="36" /></a><a href="https://www.mysql.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/mysql-colored.svg" alt="MySQL" title="MySQL" width="36" height="36" /></a><a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/django-colored-dark.svg" alt="Django" title="Django" width="36" height="36" /></a><a href="https://www.docker.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/docker-colored.svg" alt="Docker" title="Docker" width="36" height="36" /></a><a href="https://kubernetes.io/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/kubernetes-colored.svg" alt="Kubernetes" title="Kubernetes" width="36" height="36" /></a>
-</p>
+### 1. Prerequisites
+- Python 3.8+
+- Binance Futures Testnet API Key and Secret.
 
-### Socials
+### 2. Installation
+Clone the repository and install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-<p align="left"> <a href="https://www.github.com/AtulWanve" target="_blank" rel="noreferrer"> <picture> <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github-dark.svg" /> <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github.svg" /> <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github.svg" width="32" height="32" alt="GitHub" title="GitHub" /> </picture> </a> <a href="https://www.linkedin.com/in/atul-wanve-6836222b9" target="_blank" rel="noreferrer"> <picture> <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin-dark.svg" /> <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin.svg" /> <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin.svg" width="32" height="32" alt="LinkedIn" title="LinkedIn" /> </picture> </a></p>
+### 3. Configuration
+Create a `.env` file in the root directory and add your Binance Testnet credentials:
+```env
+BINANCE_API_KEY=your_api_key_here
+BINANCE_API_SECRET=your_api_secret_here
+```
+
+## How to Run
+
+### Using CLI Arguments
+**Market Order:**
+```bash
+python cli.py order --symbol BTCUSDT --side BUY --type MARKET --quantity 0.001
+```
+
+**Limit Order:**
+```bash
+python cli.py order --symbol BTCUSDT --side SELL --type LIMIT --quantity 0.001 --price 60000
+```
+
+### Using Interactive Mode
+```bash
+python cli.py interactive
+```
+
+## Project Structure
+```
+trading_bot/
+  bot/
+    __init__.py
+    client.py        # Binance client wrapper
+    orders.py        # Order placement logic
+    validators.py    # Input validation
+    logging_config.py # Logging setup
+  cli.py             # CLI entry point
+  logs/              # Log files directory
+  README.md
+  requirements.txt
+  .env               # Environment variables (ignored by git)
+```
+
+## Assumptions
+- The bot is specifically designed for the Binance Futures USDT-M Testnet.
+- Users have a valid testnet account with sufficient margin.
+- The `python-binance` library is used for API interactions.
